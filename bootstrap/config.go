@@ -5,7 +5,9 @@ import (
 )
 
 type Config struct {
-	Server `yaml:"server"`
+	Server       `yaml:"server"`
+	LineBot      `yaml:"line_bot"`
+	GoogleScript `yaml:"google_script"`
 }
 
 type Server struct {
@@ -17,4 +19,14 @@ type Server struct {
 
 func (c *Server) Addr() string {
 	return c.Host + ":" + strconv.Itoa(c.Port) + c.Router
+}
+
+type LineBot struct {
+	AdminID            string `yaml:"admin_id"`
+	RoomID             string `yaml:"room_id"`
+	ChannelAccessToken string `yaml:"channel_access_token"`
+}
+
+type GoogleScript struct {
+	Url string `yaml:"url"`
 }

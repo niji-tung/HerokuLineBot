@@ -1,6 +1,7 @@
 package router
 
 import (
+	clubLineBotApi "heroku-line-bot/server/api/clublinebot"
 	viewApi "heroku-line-bot/server/api/view"
 	"io"
 	"os"
@@ -28,6 +29,9 @@ func SystemRouter() *gin.Engine {
 
 	view := router.Group("/")
 	view.GET("/", viewApi.Index)
+
+	clubLineBot := router.Group("/")
+	clubLineBot.POST("/club-line-bot", clubLineBotApi.Index)
 
 	return router
 }

@@ -70,6 +70,10 @@ func FormRequest(uri string, method HttpMethod, param map[string]string) (*http.
 
 func JsonRequest(uri string, method HttpMethod, param interface{}) (*http.Request, error) {
 	body, _ := json.Marshal(param)
+	return RawJsonRequest(uri, method, body)
+}
+
+func RawJsonRequest(uri string, method HttpMethod, body []byte) (*http.Request, error) {
 	// 構造post請求
 	req, err := http.NewRequest(string(method), uri, bytes.NewReader(body))
 	if err != nil {

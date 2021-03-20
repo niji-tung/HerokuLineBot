@@ -3,6 +3,7 @@ package entry
 import (
 	"embed"
 	"heroku-line-bot/bootstrap"
+	"heroku-line-bot/logic"
 	"heroku-line-bot/server"
 	"os"
 )
@@ -18,6 +19,7 @@ func Run(f embed.FS) {
 		panic(err)
 	}
 
+	logic.Init(cfg)
 	server.Init(cfg)
 
 	if err := server.Run(); err != nil {
