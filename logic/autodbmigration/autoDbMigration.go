@@ -8,6 +8,7 @@ import (
 func MigrationNotExist() error {
 	tables := []*common.BaseTable{
 		database.Club.Member.BaseTable,
+		database.Club.Income.BaseTable,
 	}
 	for _, table := range tables {
 		if !table.IsExist() {

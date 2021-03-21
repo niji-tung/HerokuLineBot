@@ -2,6 +2,7 @@ package clubdb
 
 import (
 	"heroku-line-bot/storage/database/common"
+	"heroku-line-bot/storage/database/database/clubdb/table/income"
 	"heroku-line-bot/storage/database/database/clubdb/table/member"
 
 	"github.com/jinzhu/gorm"
@@ -14,5 +15,6 @@ func New(writeDb, readDb *gorm.DB) Database {
 			Write: writeDb,
 		},
 		Member: member.New(writeDb, readDb),
+		Income: income.New(writeDb, readDb),
 	}
 }
