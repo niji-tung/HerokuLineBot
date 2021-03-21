@@ -1,24 +1,25 @@
 package bootstrap
 
 import (
+	databaseDomain "heroku-line-bot/storage/database/domain"
 	"strconv"
 )
 
 type Config struct {
-	Server       `yaml:"server"`
-	LineBot      `yaml:"line_bot"`
-	GoogleScript `yaml:"google_script"`
+	Server       Server       `yaml:"server"`
+	LineBot      LineBot      `yaml:"line_bot"`
+	GoogleScript GoogleScript `yaml:"google_script"`
+	DbConfig     DbConfig     `yaml:"db"`
+	ClubDb       Db           `yaml:"club_db"`
 }
 
 type Server struct {
-	Host   string `yaml:"host"`
-	Port   int    `yaml:"port"`
-	Router string `yaml:"router"`
-	Method string `yaml:"method" json:"method"`
+	Host string `yaml:"host"`
+	Port int    `yaml:"port"`
 }
 
 func (c *Server) Addr() string {
-	return c.Host + ":" + strconv.Itoa(c.Port) + c.Router
+	return c.Host + ":" + strconv.Itoa(c.Port)
 }
 
 type LineBot struct {
@@ -29,4 +30,19 @@ type LineBot struct {
 
 type GoogleScript struct {
 	Url string `yaml:"url"`
+}
+
+type DbConfig struct {
+	MaxIdleConns int `yaml:"max_idle_conns"`
+	MaxOpenConns int `yaml:"max_open_conns"`
+	MaxLifeHour  int `yaml:"max_lifehour"`
+}
+
+type Db struct {
+	Server   `yaml:"server"`
+	Password string                `yaml:"password"`
+	Database string                `yaml:"database"`
+	User     string                `yaml:"user"`
+	Type     databaseDomain.DbType `yaml:"type"`
+	Param    string                `yaml:"param"`
 }

@@ -5,10 +5,11 @@ import (
 	"heroku-line-bot/bootstrap"
 	"heroku-line-bot/logic"
 	"heroku-line-bot/server"
+	"heroku-line-bot/storage/database"
 	"os"
 )
 
-func Run(f embed.FS) {
+func Run(f embed.FS) error {
 	configName := os.Getenv("config")
 	if configName == "" {
 		configName = "config"
@@ -16,13 +17,23 @@ func Run(f embed.FS) {
 
 	cfg := bootstrap.LoadConfig(f, configName)
 	if err := bootstrap.LoadEnv(cfg); err != nil {
-		panic(err)
+		return err
 	}
 
-	logic.Init(cfg)
+	if err := database.Init(cfg); err != nil {
+		return err
+	}
+	defer database.Dispose()
+
+	if err := logic.Init(cfg); err != nil {
+		return err
+	}
+
 	server.Init(cfg)
 
 	if err := server.Run(); err != nil {
-		panic(err)
+		return err
 	}
+
+	return nil
 }

@@ -9,5 +9,7 @@ import (
 var f embed.FS
 
 func main() {
-	entry.Run(f)
+	if err := entry.Run(f); err != nil {
+		panic(err)
+	}
 }
