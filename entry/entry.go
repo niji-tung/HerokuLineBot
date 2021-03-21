@@ -5,7 +5,7 @@ import (
 	"heroku-line-bot/bootstrap"
 	"heroku-line-bot/logic"
 	"heroku-line-bot/server"
-	"heroku-line-bot/storage/database"
+	"heroku-line-bot/storage"
 	"os"
 )
 
@@ -20,10 +20,10 @@ func Run(f embed.FS) error {
 		return err
 	}
 
-	if err := database.Init(cfg); err != nil {
+	if err := storage.Init(cfg); err != nil {
 		return err
 	}
-	defer database.Dispose()
+	defer storage.Dispose()
 
 	if err := logic.Init(cfg); err != nil {
 		return err

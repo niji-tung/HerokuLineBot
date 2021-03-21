@@ -11,6 +11,8 @@ type Config struct {
 	GoogleScript GoogleScript `yaml:"google_script"`
 	DbConfig     DbConfig     `yaml:"db"`
 	ClubDb       Db           `yaml:"club_db"`
+	RedisConfig  DbConfig     `yaml:"redis"`
+	ClubRedis    Db           `yaml:"club_redis"`
 }
 
 type Server struct {
