@@ -1,0 +1,28 @@
+definitions:
+  reqs.Index:
+    type: object
+info:
+  contact: {}
+  license: {}
+  title: Line Bot
+  version: "1.0"
+paths:
+  /club-line-bot:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 參數
+        in: body
+        name: param
+        required: true
+        schema:
+          $ref: '#/definitions/reqs.Index'
+      produces:
+      - application/json
+      responses:
+        "200": {}
+      summary: Line Bot Handler
+      tags:
+      - Line Bot
+swagger: "2.0"

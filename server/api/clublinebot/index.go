@@ -7,6 +7,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Index Line Bot
+// @Tags Line Bot
+// @Summary Line Bot Handler
+// @Accept json
+// @Produce  json
+// @Param param body reqs.Index true "參數"
+// @Success 200
+// @Router /club-line-bot [post]
 func Index(c *gin.Context) {
 	jsonData, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
