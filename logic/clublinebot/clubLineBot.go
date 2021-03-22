@@ -35,6 +35,11 @@ func (b *ClubLineBot) Handle(json string) error {
 func (b *ClubLineBot) handleEvent(eventJson *linebot.EventJson) error {
 	eventType, rawEvent := eventJson.Parse()
 	switch eventType {
+	case lineBotDomain.MESSAGE_EVENT_TYPE:
+		event := rawEvent.(*lineBotModel.MessageEvent)
+		if err := b.handleMessageEvent(event); err != nil {
+			return err
+		}
 	case lineBotDomain.MEMBER_JOINED_EVENT_TYPE:
 		event := rawEvent.(*lineBotModel.MemberJoinEvent)
 		if err := b.handleMemberJoinedEvent(event); err != nil {
